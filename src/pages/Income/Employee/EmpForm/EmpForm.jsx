@@ -7,6 +7,7 @@ import LocalStore from '../../../../Utils/LocalStore/LocalStore'
 import { v4 as uuidv4, v4 } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux'
 import { addTax } from '../../../../Features/Taxer/taxSlice'
+import calculateTax from '../../../../Utils/EmployeeTaxer/EmpTaxer'
 
 export default function EmpForm() {
     const dispatch = useDispatch()
@@ -33,14 +34,41 @@ export default function EmpForm() {
 
             try {
                 let amt = 0
-                if (values.anum == '12') {
-                    amt = parseFloat(values.amount * 12).toFixed(2)
-                } else if (values.anum == '1') {
+                let amtYear = 0
+                let amtMonth = 0
+                let taxToPayMon=0
+                let taxToPayYear=0
+                if (values.anum ==='monthly') {
+                    // amt = parseFloat(values.amount * 12).toFixed(2)
                     amt = parseFloat(values.amount).toFixed(2)
+                    if(amt>10000){
+                        //add to tax
+                        taxToPayYear = parseFloat(calculateTax(amt)).toFixed(2)
+                    }else if(amt<10000){
+                        //no tax
+                        taxToPayMon=0
+                    }
+                    amt = amt*12
+                } else if (values.anum === 'anually') {
+                    amt = parseFloat(values.amount).toFixed(2)
+                    if(amt>1200000){
+                        //add to tax
+                        taxToPayYear = parseFloat(calculateTax(amt)).toFixed(2)
+                    }else if(amt<=1200000){
+                        //no tax
+                        taxToPayMon=0
+                    }
                 }
+
+                amtYear =  parseFloat(amt).toFixed(2)
+                amtMonth =  parseFloat(amt/12).toFixed(2)
+                taxToPayMon = parseFloat(taxToPayYear/12).toFixed(2)
                 const taxWithId = {
                     ...values,
-                    amount: amt,
+                    amtYear,
+                    amtMonth,
+                    taxToPayMon,
+                    taxToPayYear,
                     id: uuidv4(), // Add a unique ID to the tax entry
                 };
                 setTax(values)
@@ -85,7 +113,7 @@ export default function EmpForm() {
                             </div>
                         </div>
                     </div>
-                    <div className="col-6 mt-3">
+                    <div className="col-8 mt-3">
                         <label htmlFor="validationTextarea" className="form-label">Add Description</label>
                         <textarea
                             value={values.description}
@@ -99,8 +127,8 @@ export default function EmpForm() {
                             {errors.description}
                         </div>
                     </div>
-                    <div className="col-6 mt-3">
-                        <label htmlFor="validationAnum" className="form-label">Monthly Or Annually ?</label>
+                    <div className="col-4 mt-3">
+                        <label htmlFor="validationAnum" className="form-label">Anum?</label>
                         <select
                             id='validationAnum'
                             name='anum'
@@ -108,8 +136,8 @@ export default function EmpForm() {
                             onChange={handleChange}
                             class="form-select"
                         >
-                            <option selected value="1">annually</option>
-                            <option value="12">monthly</option>
+                            <option selected value="anually">annually</option>
+                            <option value="monthly">monthly</option>
                         </select>
                     </div>
                 </div>

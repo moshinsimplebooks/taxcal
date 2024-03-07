@@ -44,7 +44,7 @@ export default function EmpIncList() {
                                                     <td>{tax.description}</td>
                                                     <td>Rs {parseFloat(tax.amount).toFixed(2)}</td>
                                                     {/* <td>{tax.anum=='12'?parseFloat(tax.amount*12).toFixed(2):parseFloat(tax.amount).toFixed(2)}</td> */}
-                                                    <td>{tax.anum=='12'?'Monthly':'Yearly'}</td>
+                                                    <td>{tax.anum}</td>
                                                     <td className='text-center' style={{cursor:'pointer'}}>
                                                         <i onClick={() => {
                                                             handleDeletes(tax.id)
