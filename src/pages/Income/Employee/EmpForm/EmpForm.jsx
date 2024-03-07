@@ -10,9 +10,9 @@ import { addTax } from '../../../../Features/Taxer/taxSlice'
 
 export default function EmpForm() {
     const dispatch = useDispatch()
-    const taxess = useSelector((state)=> state.taxes)
+    const taxess = useSelector((state) => state.taxes)
     const [tax, setTax] = useState('')
-    
+
     const addTaxess = (taxItem) => {
         dispatch(addTax(taxItem));
         const updatedTaxes = [...taxess, taxItem];
@@ -24,14 +24,23 @@ export default function EmpForm() {
         type: '',
         amount: '',
         description: '',
+        anum: '',
     }
     const { values, handleChange, handleSubmit, errors, touched } = useFormik({
         initialValues: initValues,
         validationSchema: BuisnessYup.createBuisnessIncome,
         onSubmit: (values) => {
+
             try {
+                let amt = 0
+                if (values.anum == '12') {
+                    amt = parseFloat(values.amount * 12).toFixed(2)
+                } else if (values.anum == '1') {
+                    amt = parseFloat(values.amount).toFixed(2)
+                }
                 const taxWithId = {
                     ...values,
+                    amount: amt,
                     id: uuidv4(), // Add a unique ID to the tax entry
                 };
                 setTax(values)
@@ -76,21 +85,35 @@ export default function EmpForm() {
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="validationTextarea" className="form-label">Add Description</label>
-                    <textarea
-                        value={values.description}
-                        onChange={handleChange}
-                        name='description'
-                        className={`form-control ${(errors.description && touched.description) ? 'is-invalid' : ''}`}
-                        id="validationTextarea"
-                        placeholder="Required example textarea"
-                    />
-                    <div className="invalid-feedback">
-                        {errors.description}
+                    <div className="col-6 mt-3">
+                        <label htmlFor="validationTextarea" className="form-label">Add Description</label>
+                        <textarea
+                            value={values.description}
+                            onChange={handleChange}
+                            name='description'
+                            className={`form-control ${(errors.description && touched.description) ? 'is-invalid' : ''}`}
+                            id="validationTextarea"
+                            placeholder="Required example textarea"
+                        />
+                        <div className="invalid-feedback">
+                            {errors.description}
+                        </div>
+                    </div>
+                    <div className="col-6 mt-3">
+                        <label htmlFor="validationAnum" className="form-label">Monthly Or Annually ?</label>
+                        <select
+                            id='validationAnum'
+                            name='anum'
+                            value={values.anum}
+                            onChange={handleChange}
+                            class="form-select"
+                        >
+                            <option selected value="1">annually</option>
+                            <option value="12">monthly</option>
+                        </select>
                     </div>
                 </div>
+
                 <div className="row mb-1">
                     <div className="col-12">
                         <button type='submit' className='btn btn-success w-100'>Add Income</button>

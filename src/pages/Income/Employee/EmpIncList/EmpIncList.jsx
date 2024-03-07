@@ -31,6 +31,7 @@ export default function EmpIncList() {
                                         <th scope="col">Type</th>
                                         <th scope="col">Description</th>
                                         <th scope="col">Amount</th>
+                                        <th scope="col">Anum</th>
                                         <th scope="col">Handle</th>
                                     </tr>
                                 </thead>
@@ -38,10 +39,12 @@ export default function EmpIncList() {
                                     {
                                         taxess.length > 0 ? (
                                             taxess.map((tax) => (
-                                                <tr > {/* Assuming there's an 'id' property for uniqueness */}
+                                                <tr > 
                                                     <td>{tax.type}</td>
                                                     <td>{tax.description}</td>
                                                     <td>Rs {parseFloat(tax.amount).toFixed(2)}</td>
+                                                    {/* <td>{tax.anum=='12'?parseFloat(tax.amount*12).toFixed(2):parseFloat(tax.amount).toFixed(2)}</td> */}
+                                                    <td>{tax.anum=='12'?'Monthly':'Yearly'}</td>
                                                     <td className='text-center' style={{cursor:'pointer'}}>
                                                         <i onClick={() => {
                                                             handleDeletes(tax.id)

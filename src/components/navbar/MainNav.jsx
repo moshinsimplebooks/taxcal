@@ -16,7 +16,6 @@ export default function MainNav() {
                 <h5 className='mb-3'>Choose Sources</h5>
                 <nav className="nav nav-pills flex-column">
                     <NavLink to={'income/'} className={`nav-link ${isActive ? 'active' : ''}`}>Income</NavLink>
-                    {/* <NavLink to={`income/${isActive?'employee':''}`} className={`nav-link ${isActive ? 'active' : ''}`}>Income</NavLink> */}
                     <NavLink to={'deduction/'} className="nav-link " >Deductions</NavLink>
                 </nav>
             </div>
