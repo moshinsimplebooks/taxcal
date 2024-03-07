@@ -35,14 +35,4 @@ function calculateTax(monthlySalarys) {
     return tax;
 }
 
-// // Monthly salary is 600,000
-// let monthlySalary = 600000;
-// let tax = calculateTax(monthlySalary)/12;
-// console.log(`The tax for the monthly salary of LKR ${monthlySalary} is: LKR ${tax.toFixed(2)}`);
-
-// // Monthly salary is 80,000 (below the no-tax threshold)
-// monthlySalary = 100000;
-// tax = calculateTax(monthlySalary);
-// console.log(`The tax for the monthly salary of LKR ${monthlySalary} is: LKR ${tax.toFixed(2)}`);
-
 export default calculateTax
