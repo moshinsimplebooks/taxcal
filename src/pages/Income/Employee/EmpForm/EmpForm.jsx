@@ -53,6 +53,7 @@ export default function EmpForm() {
                     amt = parseFloat(values.amount).toFixed(2)
                     if(amt>1200000){
                         //add to tax
+                        amt = amt-1200000
                         taxToPayYear = parseFloat(calculateTax(amt)).toFixed(2)
                     }else if(amt<=1200000){
                         //no tax
