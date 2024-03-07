@@ -18,7 +18,7 @@ export default function TaxTotal() {
     return (
         <div className="row">
             <div className="col-sm-6 mb-3 mb-sm-0">
-                <div className="card text-center">
+                <div className="card text-center shadow-sm">
                     <div className="card-body">
                         <h5 className="card-title">Total Tax Payable for 22/23</h5>
                         <h2 className='text-danger fw-bolder'>Rs {total2023}</h2>
@@ -27,7 +27,7 @@ export default function TaxTotal() {
                 </div>
             </div>
             <div className="col-sm-6 mb-3 mb-sm-0">
-                <div className="card text-center">
+                <div className="card text-center shadow-sm">
                     <div className="card-body">
                         <h5 className="card-title">Total Tax Payable From 2024</h5>
                         <h2 className='text-danger fw-bolder'>Rs {total2024}</h2>

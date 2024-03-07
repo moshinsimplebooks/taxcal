@@ -10,6 +10,7 @@ export default function Header() {
                         <h4 className='my-0 fw-bolder'>Tax Calculator</h4>
                     </a>
                 </div>
-            </nav></>
+            </nav>
+        </>
     )
 }

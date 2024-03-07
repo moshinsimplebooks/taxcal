@@ -18,7 +18,7 @@ export default function Employee() {
     return (
         <>
             {/* the descrition starts */}
-            <div className="row mt-4">
+            <div className="row mt-4 ">
                 {/* the list card */}
                 <EmpIncList />
                 {/* the form area */}

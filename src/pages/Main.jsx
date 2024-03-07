@@ -7,6 +7,7 @@ import { Outlet } from 'react-router-dom'
 import LocalStore from '../Utils/LocalStore/LocalStore'
 import Toaster from '../Utils/Toaster/Toaster'
 import { ToastContainer } from 'react-toastify'
+import MainNav from '../components/navbar/MainNav'
 
 export default function Main() {
     const [taxes, setTaxes] = useState(['']);
@@ -20,20 +21,29 @@ export default function Main() {
         } else {
             setTaxes([]); // Set taxes to an empty array if there are no saved taxes
         }
-    }, []); 
+    }, []);
 
     return (
         <>
-            <ToastContainer/>
+            <ToastContainer />
+            {/* side navbatr */}
             <div className="container">
                 {/* header */}
                 <Header />
                 {/* cards */}
-                <TaxTotal/>
-                {/* router */}
-                <Navbar />
-                {/* outlet */}
-                <Outlet />
+                <TaxTotal />
+                <div className="row">
+                    <div className="col-2">
+                        <MainNav />
+                    </div>
+                    <div className="col-10">
+                        {/* router */}
+                        <Navbar />
+                        {/* outlet */}
+                        <Outlet />
+                    </div>
+                </div>
+
             </div>
         </>
     )
