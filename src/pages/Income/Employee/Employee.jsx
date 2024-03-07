@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import EmpIncList from './EmpIncList/EmpIncList'
 import EmpForm from './EmpForm/EmpForm'
-import LocalStore from '../../Utils/LocalStore/LocalStore';
-import Toaster from '../../Utils/Toaster/Toaster';
+import LocalStore from '../../../Utils/LocalStore/LocalStore';
+import Toaster from '../../../Utils/Toaster/Toaster';
 
 export default function Employee() {
     const [taxes, setTaxes] = useState(() => {

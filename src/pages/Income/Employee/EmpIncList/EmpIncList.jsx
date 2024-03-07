@@ -1,8 +1,8 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { removeTax } from '../../../Features/Taxer/taxSlice'
-import Toaster from '../../../Utils/Toaster/Toaster'
-import LocalStore from '../../../Utils/LocalStore/LocalStore'
+import { removeTax } from '../../../../Features/Taxer/taxSlice'
+import Toaster from '../../../../Utils/Toaster/Toaster'
+import LocalStore from '../../../../Utils/LocalStore/LocalStore'
 
 export default function EmpIncList() {
     const taxess = useSelector((state)=> state.taxes)

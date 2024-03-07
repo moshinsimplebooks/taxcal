@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Header from '../components/header/Header'
 import Navbar from '../components/navbar/Navbar'
-import Employee from './Employee/Employee'
-import TaxTotal from './TotalTax/TaxTotal'
+import TaxTotal from '../components/TotalTax/TaxTotal'
 import { Outlet } from 'react-router-dom'
 import LocalStore from '../Utils/LocalStore/LocalStore'
 import Toaster from '../Utils/Toaster/Toaster'
@@ -33,17 +32,14 @@ export default function Main() {
                 {/* cards */}
                 <TaxTotal />
                 <div className="row">
-                    <div className="col-2">
-                        <MainNav />
-                    </div>
+                    <MainNav />
                     <div className="col-10">
                         {/* router */}
-                        <Navbar />
+                        {/* <Navbar /> */}
                         {/* outlet */}
                         <Outlet />
                     </div>
                 </div>
-
             </div>
         </>
     )
