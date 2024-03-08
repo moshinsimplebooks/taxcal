@@ -1,18 +1,15 @@
 import { useFormik } from 'formik'
-import React, { useState } from 'react'
 import BuisnessYup from '../../../../Utils/validation/BuisnessYup/BuisnessYup'
 import Toaster from '../../../../Utils/Toaster/Toaster'
 import ResponseHandler from '../../../../Utils/ResponseHandler/ResponseHandler'
 import LocalStore from '../../../../Utils/LocalStore/LocalStore'
-import { v4 as uuidv4, v4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux'
 import { addTax } from '../../../../Features/Taxer/taxSlice'
-import calculateTax from '../../../../Utils/EmployeeTaxer/EmpTaxer'
 
 export default function EmpForm() {
     const dispatch = useDispatch()
     const taxess = useSelector((state) => state.taxes)
-    const [tax, setTax] = useState('')
 
     const addTaxess = (taxItem) => {
         dispatch(addTax(taxItem));
@@ -31,51 +28,17 @@ export default function EmpForm() {
         initialValues: initValues,
         validationSchema: BuisnessYup.createBuisnessIncome,
         onSubmit: (values) => {
-
             try {
-                let amt = 0
-                let amtYear = 0
-                let amtMonth = 0
-                let taxToPayMon=0
-                let taxToPayYear=0
-                if (values.anum ==='monthly') {
-                    // amt = parseFloat(values.amount * 12).toFixed(2)
-                    amt = parseFloat(values.amount).toFixed(2)
-                    if(amt>10000){
-                        //add to tax
-                        taxToPayYear = parseFloat(calculateTax(amt)).toFixed(2)
-                    }else if(amt<10000){
-                        //no tax
-                        taxToPayMon=0
-                    }
-                    amt = amt*12
-                } else if (values.anum === 'anually') {
-                    amt = parseFloat(values.amount).toFixed(2)
-                    if(amt>1200000){
-                        //add to tax
-                        amt = amt-1200000
-                        taxToPayYear = parseFloat(calculateTax(amt)).toFixed(2)
-                    }else if(amt<=1200000){
-                        //no tax
-                        taxToPayMon=0
-                    }
-                }
-
-                amtYear =  parseFloat(amt).toFixed(2)
-                amtMonth =  parseFloat(amt/12).toFixed(2)
-                taxToPayMon = parseFloat(taxToPayYear/12).toFixed(2)
+                let amt = parseFloat(values.amount).toFixed(2);
+                let yearTotAmt = (values.anum === 'monthly') ? parseFloat(values.amount * 12).toFixed(2) : amt;
                 const taxWithId = {
                     ...values,
-                    amtYear,
-                    amtMonth,
-                    taxToPayMon,
-                    taxToPayYear,
-                    id: uuidv4(), // Add a unique ID to the tax entry
+                    yearTotAmt,
+                    id: uuidv4(),
                 };
-                setTax(values)
-                addTaxess(taxWithId)
+                addTaxess(taxWithId);
             } catch (error) {
-                ResponseHandler.handleCommonError(error)
+                ResponseHandler.handleCommonError(error);
             }
         }
     })
@@ -135,7 +98,7 @@ export default function EmpForm() {
                             name='anum'
                             value={values.anum}
                             onChange={handleChange}
-                            class="form-select"
+                            className="form-select"
                         >
                             <option selected value="anually">annually</option>
                             <option value="monthly">monthly</option>
