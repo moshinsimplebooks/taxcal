@@ -73,8 +73,7 @@ export default function EmpForm() {
                                 name='amount'
                                 className={`form-control ${(errors.amount && touched.amount) ? 'is-invalid' : ''}`}
                                 placeholder="15000000"
-                                thousandSeparator={true}
-                                prefix={'Rs '} // You can specify a prefix like currency symbol
+                                thousandSeparator={true} 
                             />
                             <div className="invalid-feedback">
                                 {errors.amount}

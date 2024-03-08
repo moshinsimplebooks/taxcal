@@ -14,9 +14,11 @@ export default function TaxTotal() {
         totalTaxAmount = calculateTax(totalAmount)
         return parseFloat(totalTaxAmount).toFixed(2);
     };
-    
+
     const totalTax = calculateTotalAmount();
     const totalQuart = parseFloat(totalTax / 4).toFixed(2)
+    // Use the format specifier for comma as a thousand separator
+    // let formatted_number = "{:,.2f}".format(t)
     return (
         <div className="row">
             <div className="col-sm-6 mb-3 mb-sm-0">
