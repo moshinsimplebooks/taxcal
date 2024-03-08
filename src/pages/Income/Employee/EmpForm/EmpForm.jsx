@@ -6,6 +6,7 @@ import LocalStore from '../../../../Utils/LocalStore/LocalStore'
 import { v4 as uuidv4 } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux'
 import { addTax } from '../../../../Features/Taxer/taxSlice'
+import { NumberFormatBase, NumericFormat } from 'react-number-format'
 
 export default function EmpForm() {
     const dispatch = useDispatch()
@@ -64,14 +65,17 @@ export default function EmpForm() {
                         <label htmlFor="validationAmount" className="form-label">Enter Amount</label>
                         <div className='input-group'>
                             <span className="input-group-text" id="basic-addon1">Rs</span>
-                            <input
+                            <NumericFormat
                                 value={values.amount}
-                                onChange={handleChange}
+                                onValueChange={(values) => handleChange({ target: { name: 'amount', value: values.value } })}
                                 type="text"
                                 id='validationAmount'
                                 name='amount'
                                 className={`form-control ${(errors.amount && touched.amount) ? 'is-invalid' : ''}`}
-                                placeholder="15000000" />
+                                placeholder="15000000"
+                                thousandSeparator={true}
+                                prefix={'Rs '} // You can specify a prefix like currency symbol
+                            />
                             <div className="invalid-feedback">
                                 {errors.amount}
                             </div>
