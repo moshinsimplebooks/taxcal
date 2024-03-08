@@ -5,13 +5,14 @@ import Toaster from '../../../../Utils/Toaster/Toaster'
 import LocalStore from '../../../../Utils/LocalStore/LocalStore'
 
 export default function EmpIncList() {
-    const taxess = useSelector((state)=> state.taxes)
+    const taxes = useSelector((state)=> state.taxes)
     const dispatch = useDispatch()
+    const filterEmployeeTaxes = taxes.filter(tax => tax.source === "empIncome")
 
     const handleDeletes = (id) => {
         // Filter out the todo item with the specific id
         dispatch(removeTax(id))
-        const newTaxes = taxess.filter((tax) => tax.id !== id);
+        const newTaxes = filterEmployeeTaxes.filter((tax) => tax.id !== id);
         LocalStore.storeTax(JSON.stringify(newTaxes))
         // Update local storage to reflect the change
         Toaster.justToast('info','Deleted',()=>{})
@@ -37,8 +38,8 @@ export default function EmpIncList() {
                                 </thead>
                                 <tbody>
                                     {
-                                        taxess.length > 0 ? (
-                                            taxess.map((tax) => (
+                                        filterEmployeeTaxes.length > 0 ? (
+                                            filterEmployeeTaxes.map((tax) => (
                                                 <tr key={tax.id}> 
                                                     <td>{tax.type}</td>
                                                     <td>{tax.description}</td>
