@@ -1,7 +1,16 @@
 import React from 'react'
+import EducationDedList from './EducationalDedList/EducationalDedList'
+import EducationForm from './EducationalForm/EducationalForm'
 
-export default function Educational() {
+export default function Investment() {
   return (
-    <div>Educational</div>
+    <>
+      <div className="row mt-4">
+        {/* the list card */}
+        <EducationDedList />
+        {/* the form area */}
+        <EducationForm />
+      </div>
+    </>
   )
 }
