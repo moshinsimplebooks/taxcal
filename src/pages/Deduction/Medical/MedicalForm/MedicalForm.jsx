@@ -1,20 +1,21 @@
-import { useFormik } from 'formik'
-import BuisnessYup from '../../../../Utils/validation/BuisnessYup/BuisnessYup'
-import Toaster from '../../../../Utils/Toaster/Toaster'
-import ResponseHandler from '../../../../Utils/ResponseHandler/ResponseHandler'
-import LocalStore from '../../../../Utils/LocalStore/LocalStore'
-import { v4 as uuidv4 } from 'uuid';
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import Toaster from '../../../../Utils/Toaster/Toaster';
+import LocalStore from '../../../../Utils/LocalStore/LocalStore';
+import { useFormik } from 'formik';
+import { NumericFormat } from 'react-number-format';
+import ResponseHandler from '../../../../Utils/ResponseHandler/ResponseHandler';
+import { v4 as uuidv4 } from 'uuid';
 import { addTax } from '../../../../Features/Taxer/taxSlice'
-import { NumericFormat } from 'react-number-format'
+import MedicalYup from '../../../../Utils/validation/MedicalYup/MedicalYup';
 
-export default function EmpForm() {
+export default function MedicalForm() {
     const dispatch = useDispatch()
-    const taxess = useSelector((state) => state.taxes)
+    const taxes = useSelector((state) => state.taxes)
 
-    const addTaxess = (taxItem) => {
+    const addTaxes = (taxItem) => {
         dispatch(addTax(taxItem));
-        const updatedTaxes = [...taxess, taxItem];
+        const updatedTaxes = [...taxes, taxItem];
         Toaster.justToast('success', 'Added', () => { });
         LocalStore.storeTax(JSON.stringify(updatedTaxes));
     };
@@ -25,9 +26,10 @@ export default function EmpForm() {
         description: '',
         anum: '',
     }
+
     const { values, handleChange, handleSubmit, errors, touched } = useFormik({
         initialValues: initValues,
-        validationSchema: BuisnessYup.createBuisnessIncome,
+        validationSchema: MedicalYup.createMedicalDeduction,
         onSubmit: (values) => {
             try {
                 let amt = parseFloat(values.amount).toFixed(2);
@@ -35,10 +37,10 @@ export default function EmpForm() {
                 const taxWithId = {
                     ...values,
                     yearTotAmt,
-                    source: 'empIncome',
+                    source: 'dedMedical',
                     id: uuidv4(),
                 };
-                addTaxess(taxWithId);
+                addTaxes(taxWithId);
             } catch (error) {
                 ResponseHandler.handleCommonError(error);
             }
@@ -114,10 +116,9 @@ export default function EmpForm() {
                         </div>
                     </div>
                 </div>
-
                 <div className="row mb-1">
                     <div className="col-12">
-                        <button type='submit' className='btn btn-success w-100'>Add Income</button>
+                        <button type='submit' className='btn btn-success w-100'>Add Medical Expenses</button>
                     </div>
                 </div>
             </form>

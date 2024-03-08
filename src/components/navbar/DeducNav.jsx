@@ -16,9 +16,6 @@ export default function DeducNav() {
             <li className="nav-item">
                 <NavLink to={'educational'} className="nav-link">Educational</NavLink>
             </li>
-            <li className="nav-item">
-                <NavLink to={'donations'} className="nav-link">Donations</NavLink>
-            </li>
         </ul>
     )
 }

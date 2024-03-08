@@ -42,7 +42,6 @@ function App() {
           <Route path='deduction' element={<Deduction/>}>
             <Route index element={<Medical/>}/>
             <Route path='medical' element={<Medical/>}/>
-            <Route path='donations' element={<Donations/>}/>
             <Route path='educational' element={<Educational/>}/>
             <Route path='housing' element={<Housing/>}/>
           </Route>

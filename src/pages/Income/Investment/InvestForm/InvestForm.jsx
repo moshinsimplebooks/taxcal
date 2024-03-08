@@ -110,7 +110,7 @@ export default function InvestForm() {
                             className={`form-control ${(errors.anum && touched.anum) ? 'is-invalid' : ''}`}
                         >
                             <option value="">Choose</option>
-                            <option value="anually">annually</option>
+                            <option value="annually">annually</option>
                             <option value="monthly">monthly</option>
                         </select>
                         <div className="invalid-feedback">
