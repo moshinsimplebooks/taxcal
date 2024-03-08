@@ -94,15 +94,20 @@ export default function EmpForm() {
                     <div className="col-4 mt-3">
                         <label htmlFor="validationAnum" className="form-label">Anum?</label>
                         <select
+                            required
                             id='validationAnum'
                             name='anum'
                             value={values.anum}
                             onChange={handleChange}
-                            className="form-select"
+                            className={`form-control ${(errors.anum && touched.anum) ? 'is-invalid' : ''}`}
                         >
-                            <option selected value="anually">annually</option>
+                            <option value="">Choose</option>
+                            <option value="anually">annually</option>
                             <option value="monthly">monthly</option>
                         </select>
+                        <div className="invalid-feedback">
+                            {errors.anum}
+                        </div>
                     </div>
                 </div>
 
