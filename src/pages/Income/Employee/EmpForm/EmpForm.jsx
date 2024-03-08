@@ -6,7 +6,7 @@ import LocalStore from '../../../../Utils/LocalStore/LocalStore'
 import { v4 as uuidv4 } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux'
 import { addTax } from '../../../../Features/Taxer/taxSlice'
-import {  NumericFormat } from 'react-number-format'
+import { NumericFormat } from 'react-number-format'
 
 export default function EmpForm() {
     const dispatch = useDispatch()
@@ -35,7 +35,7 @@ export default function EmpForm() {
                 const taxWithId = {
                     ...values,
                     yearTotAmt,
-                    source:'empIncome',
+                    source: 'empIncome',
                     id: uuidv4(),
                 };
                 addTaxess(taxWithId);
@@ -57,7 +57,7 @@ export default function EmpForm() {
                             id="validationType"
                             className={`form-control ${(errors.type && touched.type) ? 'is-invalid' : ''}`}
                             name='type'
-                            placeholder="saman siri" />
+                            placeholder="primary" />
                         <div className="invalid-feedback">
                             {errors.type}
                         </div>
@@ -74,14 +74,14 @@ export default function EmpForm() {
                                 name='amount'
                                 className={`form-control ${(errors.amount && touched.amount) ? 'is-invalid' : ''}`}
                                 placeholder="15000000"
-                                thousandSeparator={true} 
+                                thousandSeparator={true}
                             />
                             <div className="invalid-feedback">
                                 {errors.amount}
                             </div>
                         </div>
                     </div>
-                    <div className="col-8 mt-3">
+                    <div className="col-6 mt-3">
                         <label htmlFor="validationTextarea" className="form-label">Add Description</label>
                         <textarea
                             value={values.description}
@@ -89,14 +89,14 @@ export default function EmpForm() {
                             name='description'
                             className={`form-control ${(errors.description && touched.description) ? 'is-invalid' : ''}`}
                             id="validationTextarea"
-                            placeholder="Required example textarea"
+                            placeholder="Enter Description"
                         />
                         <div className="invalid-feedback">
                             {errors.description}
                         </div>
                     </div>
-                    <div className="col-4 mt-3">
-                        <label htmlFor="validationAnum" className="form-label">Anum?</label>
+                    <div className="col-6 mt-3">
+                        <label htmlFor="validationAnum" className="form-label">Annual or monthly</label>
                         <select
                             required
                             id='validationAnum'

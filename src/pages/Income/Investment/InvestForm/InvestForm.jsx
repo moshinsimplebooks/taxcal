@@ -61,7 +61,7 @@ export default function InvestForm() {
                             id="validationType"
                             className={`form-control ${(errors.type && touched.type) ? 'is-invalid' : ''}`}
                             name='type'
-                            placeholder="saman siri" />
+                            placeholder="primary" />
                         <div className="invalid-feedback">
                             {errors.type}
                         </div>
@@ -85,7 +85,7 @@ export default function InvestForm() {
                             </div>
                         </div>
                     </div>
-                    <div className="col-8 mt-3">
+                    <div className="col-6 mt-3">
                         <label htmlFor="validationTextarea" className="form-label">Add Description</label>
                         <textarea
                             value={values.description}
@@ -93,14 +93,14 @@ export default function InvestForm() {
                             name='description'
                             className={`form-control ${(errors.description && touched.description) ? 'is-invalid' : ''}`}
                             id="validationTextarea"
-                            placeholder="Required example textarea"
+                            placeholder="Enter Description"
                         />
                         <div className="invalid-feedback">
                             {errors.description}
                         </div>
                     </div>
-                    <div className="col-4 mt-3">
-                        <label htmlFor="validationAnum" className="form-label">Anum?</label>
+                    <div className="col-6 mt-3">
+                        <label htmlFor="validationAnum" className="form-label">Annual or monthly</label>
                         <select
                             required
                             id='validationAnum'
