@@ -38,6 +38,7 @@ export default function HousingForm() {
                     ...values,
                     yearTotAmt,
                     source: 'dedHousing',
+                    taxType:'deduction',
                     id: uuidv4(),
                 };
                 addTaxes(taxWithId);

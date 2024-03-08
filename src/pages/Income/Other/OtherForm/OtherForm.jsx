@@ -40,6 +40,7 @@ export default function OtherIncForm() {
                     ...values,
                     yearTotAmt,
                     source: 'empOtherInc',
+                    taxType:'income',
                     id: uuidv4(),
                 };
                 addTaxes(taxWithId);

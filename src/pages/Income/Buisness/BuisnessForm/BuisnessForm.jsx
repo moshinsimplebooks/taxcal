@@ -40,6 +40,7 @@ export default function BuisnessForm() {
                     ...values,
                     yearTotAmt,
                     source: 'empBuisness',
+                    taxType:'income',
                     id: uuidv4(),
                 };
                 addTaxes(taxWithId);

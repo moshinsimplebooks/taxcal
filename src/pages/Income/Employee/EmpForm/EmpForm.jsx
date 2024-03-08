@@ -36,6 +36,7 @@ export default function EmpForm() {
                     ...values,
                     yearTotAmt,
                     source: 'empIncome',
+                    taxType:'income',
                     id: uuidv4(),
                 };
                 addTaxess(taxWithId);

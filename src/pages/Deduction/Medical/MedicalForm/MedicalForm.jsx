@@ -8,6 +8,7 @@ import ResponseHandler from '../../../../Utils/ResponseHandler/ResponseHandler';
 import { v4 as uuidv4 } from 'uuid';
 import { addTax } from '../../../../Features/Taxer/taxSlice'
 import MedicalYup from '../../../../Utils/validation/MedicalYup/MedicalYup';
+import ReqObj from '../../../../Utils/DeductionCalc/ReqObj';
 
 export default function MedicalForm() {
     const dispatch = useDispatch()
@@ -38,6 +39,7 @@ export default function MedicalForm() {
                     ...values,
                     yearTotAmt,
                     source: 'dedMedical',
+                    taxType:'deduction',
                     id: uuidv4(),
                 };
                 addTaxes(taxWithId);

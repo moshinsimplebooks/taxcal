@@ -40,6 +40,7 @@ export default function InvestForm() {
                     ...values,
                     yearTotAmt,
                     source: 'empInvest',
+                    taxType:'income',
                     id: uuidv4(),
                 };
                 addTaxes(taxWithId);

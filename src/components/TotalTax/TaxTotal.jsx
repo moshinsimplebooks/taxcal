@@ -3,12 +3,23 @@ import calculateTax from '../../Utils/EmployeeTaxer/EmpTaxer';
 
 export default function TaxTotal() {
 
-    const taxess = useSelector((state) => state.taxes)
+    const taxes = useSelector((state) => state.taxes)
+    const filterIncomes = taxes.filter(tax => tax.source === "income")
+    const filterDeductions = taxes.filter(tax => tax.source === "deduction")
+
+    let totalDeductAmount=0
+    let totalIncomeAmount=0
+    filterDeductions.forEach(tax => {
+        totalDeductAmount += parseFloat(tax.yearTotAmt);
+    });
+    filterIncomes.forEach(tax => {
+        totalIncomeAmount += parseFloat(tax.yearTotAmt);
+    });
 
     const calculateTotalAmount = () => {
         let totalAmount = 0;
         let totalTaxAmount = 0;
-        taxess.forEach(tax => {
+        taxes.forEach(tax => {
             totalAmount += parseFloat(tax.yearTotAmt);
         });
         totalTaxAmount = calculateTax(totalAmount)

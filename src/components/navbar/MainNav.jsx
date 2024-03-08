@@ -11,7 +11,7 @@ export default function MainNav() {
     }
 
     return (
-        <div className="col-2">
+        <div className="col-12 col-md-2">
             <div className=' mt-4 p-3 border rounded shadow-sm'>
                 <h5 className='mb-3'>Choose Sources</h5>
                 <nav className="nav nav-pills flex-column">

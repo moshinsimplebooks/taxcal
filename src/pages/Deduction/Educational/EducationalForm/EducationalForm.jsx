@@ -38,6 +38,7 @@ export default function EducationForm() {
                     ...values,
                     yearTotAmt,
                     source: 'dedEducation',
+                    taxType:'deduction',
                     id: uuidv4(),
                 };
                 addTaxes(taxWithId);
