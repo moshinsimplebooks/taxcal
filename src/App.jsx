@@ -11,6 +11,7 @@ import Investment from './pages/Income/Investment/Investment'
 import Housing from './pages/Deduction/Housing/Housing'
 import Donations from './pages/Deduction/Donations/Donations'
 import Educational from './pages/Deduction/Educational/Educational'
+import Other from './pages/Income/Other/Other'
 function App() {
 
   return (
@@ -36,6 +37,7 @@ function App() {
             <Route path='employee' element={<Employee/>}/>
             <Route path='buisness' element={<Buisness/>}/>
             <Route path='investment' element={<Investment/>}/>
+            <Route path='other' element={<Other/>}/>
           </Route>
           <Route path='deduction' element={<Deduction/>}>
             <Route index element={<Medical/>}/>

@@ -17,6 +17,9 @@ export default function IncNav() {
             <li className="nav-item">
                 <NavLink to={'investment'} className="nav-link" >Investment </NavLink>
             </li>
+            <li className="nav-item">
+                <NavLink to={'other'} className="nav-link" >Other</NavLink>
+            </li>
         </ul>
     )
 }
