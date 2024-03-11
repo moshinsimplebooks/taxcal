@@ -9,7 +9,6 @@ import Medical from './pages/Deduction/Medical/Medical'
 import Buisness from './pages/Income/Buisness/Buisness'
 import Investment from './pages/Income/Investment/Investment'
 import Housing from './pages/Deduction/Housing/Housing'
-import Educational from './pages/Deduction/Educational/Educational'
 import Other from './pages/Income/Other/Other'
 function App() {
 
@@ -28,7 +27,6 @@ function App() {
           <Route path='deduction' element={<Deduction/>}>
             <Route index element={<Medical/>}/>
             <Route path='medical' element={<Medical/>}/>
-            <Route path='educational' element={<Educational/>}/>
             <Route path='housing' element={<Housing/>}/>
           </Route>
         </Route>
