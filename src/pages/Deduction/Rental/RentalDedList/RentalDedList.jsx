@@ -1,18 +1,19 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { removeTax } from '../../../../Features/Taxer/taxSlice'
+import { removeTax,setRentLimiter } from '../../../../Features/Taxer/taxSlice'
 import Toaster from '../../../../Utils/Toaster/Toaster'
 import LocalStore from '../../../../Utils/LocalStore/LocalStore'
 
-export default function MedicalIncList() {
+export default function RentalIncList() {
     const taxes = useSelector((state) => state.taxes)
-    const filterMedicalTaxes = taxes.filter(tax => tax.source === "dedMedical")
+    const filterRentalTaxes = taxes.filter(tax => tax.source === "dedRental")
 
     const dispatch = useDispatch()
     const handleDeletes = (id) => {
         // Filter out the todo item with the specific id
         dispatch(removeTax(id))
-        const newTaxes = filterMedicalTaxes.filter((tax) => tax.id !== id);
+        dispatch(setRentLimiter(false))
+        const newTaxes = filterRentalTaxes.filter((tax) => tax.id !== id);
         LocalStore.storeTax(JSON.stringify(newTaxes))
         // Update local storage to reflect the change
         Toaster.justToast('info', 'Deleted', () => { })
@@ -22,7 +23,7 @@ export default function MedicalIncList() {
         <div className="col-sm-7 mb-3 mb-sm-0">
             <div className="card border-0">
                 <div className="card-body py-0">
-                    <h5 className="card-title">Medical Deduction</h5>
+                    <h5 className="card-title">Rental Deduction</h5>
                     <p className="card-text">All income received from employment including allowances and any bonus.</p>
                     <div>
                         <table className="table table-striped" >
@@ -37,8 +38,8 @@ export default function MedicalIncList() {
                             </thead>
                             <tbody>
                                 {
-                                    filterMedicalTaxes.length > 0 ? (
-                                        filterMedicalTaxes.map((tax) => (
+                                    filterRentalTaxes.length > 0 ? (
+                                        filterRentalTaxes.map((tax) => (
                                             <tr key={tax.id}>
                                                 <td>{tax.type}</td>
                                                 <td>{tax.description}</td>

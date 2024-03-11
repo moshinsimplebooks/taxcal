@@ -1,7 +1,7 @@
 import * as yup from 'yup'
 
-class MedicalYup{
-    createMedicalDeduction = yup.object({
+class RentalYup{
+    createRentalDeduction = yup.object({
         type: yup.string().required(),
         description: yup.string().required(),
         amount:yup.number().typeError('Must be a number').min(0,'amount is positive').required(),
@@ -9,4 +9,4 @@ class MedicalYup{
     })
 }
 
-export default MedicalYup = new MedicalYup()
+export default RentalYup = new RentalYup()

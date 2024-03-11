@@ -5,10 +5,10 @@ import Main from './pages/Main'
 import Income from './pages/Income/Income'
 import Employee from './pages/Income/Employee/Employee'
 import Deduction from './pages/Deduction/Deduction'
-import Medical from './pages/Deduction/Medical/Medical'
+import Rental from './pages/Deduction/Rental/Rental'
 import Buisness from './pages/Income/Buisness/Buisness'
 import Investment from './pages/Income/Investment/Investment'
-import Housing from './pages/Deduction/Housing/Housing'
+import Solar from './pages/Deduction/Solar/Solar'
 import Other from './pages/Income/Other/Other'
 function App() {
 
@@ -25,9 +25,9 @@ function App() {
             <Route path='other' element={<Other/>}/>
           </Route>
           <Route path='deduction' element={<Deduction/>}>
-            <Route index element={<Medical/>}/>
-            <Route path='medical' element={<Medical/>}/>
-            <Route path='housing' element={<Housing/>}/>
+            <Route index element={<Rental/>}/>
+            <Route path='rental' element={<Rental/>}/>
+            <Route path='solar' element={<Solar/>}/>
           </Route>
         </Route>
       </Routes>

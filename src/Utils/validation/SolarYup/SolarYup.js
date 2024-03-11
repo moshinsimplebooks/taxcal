@@ -1,6 +1,6 @@
 import * as yup from 'yup'
 
-class HousingYup{
+class SolarYup{
     createMedicalDeduction = yup.object({
         type: yup.string().required(),
         description: yup.string().required(),
@@ -9,4 +9,4 @@ class HousingYup{
     })
 }
 
-export default HousingYup = new HousingYup()
+export default SolarYup = new SolarYup()

@@ -19,39 +19,23 @@ export default function TaxTotal() {
     });
 
     //caclulate the deduction based on the deduction type
-    let medicalsDeductions = filterDeductions.filter(tax => tax.source === "dedMedical")
-    let totalmedicalsDeductAmount = 0.00
-    let medicalsTax = 0.00
-    if (medicalsDeductions.length > 0) {
-        medicalsDeductions.forEach(tax => {
-            totalmedicalsDeductAmount += parseFloat(tax.yearTotAmt);
-        });
-        medicalsTax = RentDeduction(totalmedicalsDeductAmount)
-    } else
-        medicalsTax = 0.00
+    let rentalDeductions = filterDeductions.filter(tax => tax.source === "dedRental")
+    let rentalTax = 0;
+    rentalTax = RentDeduction(rentalDeductions)
 
-    // for housing calculations
-    let housingDeductions = filterDeductions.filter(tax => tax.source === "dedHousing")
-    let totalHouseDeductAmount = 0.00
-    let housingTax = 0.00
-    if (housingDeductions.length > 0) {
-        housingDeductions.forEach(tax => {
-            totalHouseDeductAmount += parseFloat(tax.yearTotAmt);
-        });
-        housingTax = SolarDeduction(totalHouseDeductAmount)
-    } else {
-        housingTax = 0.00
-    }
+    // for solar calculations
+    let solarDeductions = filterDeductions.filter(tax => tax.source === "dedSolar")
+    let solarTax = 0
+    solarTax = SolarDeduction(solarDeductions)
 
     let calculateTotalAmount = () => {
         // calculate the deduction totals
         let taxablePay = 0;
         let totalTaxAmount = 0;
-        taxablePay = totalIncomeAmount - (medicalsTax + housingTax)
+        taxablePay = parseFloat(totalIncomeAmount).toFixed(2) - (parseFloat(rentalTax) + parseFloat(solarTax))
         totalTaxAmount = calculateTax(taxablePay)
         return parseFloat(totalTaxAmount).toFixed(2);
     };
-
     let totalYearlyTax = calculateTotalAmount();
     let totalQuartlyTax = parseFloat(totalYearlyTax / 4).toFixed(2)
     return (

@@ -6,16 +6,19 @@ import { useFormik } from 'formik';
 import { NumericFormat } from 'react-number-format';
 import ResponseHandler from '../../../../Utils/ResponseHandler/ResponseHandler';
 import { v4 as uuidv4 } from 'uuid';
-import { addTax } from '../../../../Features/Taxer/taxSlice'
-import MedicalYup from '../../../../Utils/validation/MedicalYup/MedicalYup';
-import ReqObj from '../../../../Utils/DeductionCalc/ReqObj';
+import { addTax,setSolarLimiter } from '../../../../Features/Taxer/taxSlice'
+import SolarYup from '../../../../Utils/validation/SolarYup/SolarYup';
 
-export default function MedicalForm() {
+export default function SolarForm() {
     const dispatch = useDispatch()
     const taxes = useSelector((state) => state.taxes)
+    const solarLimit = useSelector((state) => state.solarLimiter)
+    let hasSolar = taxes.some(tax => tax.source === "dedSolar")
+    if(hasSolar) dispatch(setSolarLimiter(true))
 
     const addTaxes = (taxItem) => {
         dispatch(addTax(taxItem));
+        dispatch(setSolarLimiter(false))
         const updatedTaxes = [...taxes, taxItem];
         Toaster.justToast('success', 'Added', () => { });
         LocalStore.storeTax(JSON.stringify(updatedTaxes));
@@ -30,7 +33,7 @@ export default function MedicalForm() {
 
     const { values, handleChange, handleSubmit, errors, touched } = useFormik({
         initialValues: initValues,
-        validationSchema: MedicalYup.createMedicalDeduction,
+        validationSchema: SolarYup.createSolarDeduction,
         onSubmit: (values) => {
             try {
                 let amt = parseFloat(values.amount).toFixed(2);
@@ -38,7 +41,7 @@ export default function MedicalForm() {
                 const taxWithId = {
                     ...values,
                     yearTotAmt,
-                    source: 'dedMedical',
+                    source: 'dedSolar',
                     taxType:'deduction',
                     id: uuidv4(),
                 };
@@ -120,7 +123,7 @@ export default function MedicalForm() {
                 </div>
                 <div className="row mb-1">
                     <div className="col-12">
-                        <button type='submit' className='btn btn-success w-100'>Add Medical Expenses</button>
+                        <button disabled={solarLimit} type='submit' className='btn btn-success w-100'>Add Solar Expenses</button>
                     </div>
                 </div>
             </form>

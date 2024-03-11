@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Toaster from '../../../../Utils/Toaster/Toaster';
 import LocalStore from '../../../../Utils/LocalStore/LocalStore';
@@ -6,15 +6,21 @@ import { useFormik } from 'formik';
 import { NumericFormat } from 'react-number-format';
 import ResponseHandler from '../../../../Utils/ResponseHandler/ResponseHandler';
 import { v4 as uuidv4 } from 'uuid';
-import { addTax } from '../../../../Features/Taxer/taxSlice'
-import HousingYup from '../../../../Utils/validation/HousingYup/HousingYup';
+import { addTax,setRentLimiter } from '../../../../Features/Taxer/taxSlice'
+import RentalYup from '../../../../Utils/validation/RentalYup/RentalYup';
+import ReqObj from '../../../../Utils/DeductionCalc/ReqObj';
 
-export default function HousingForm() {
+export default function RentalForm() {
+    
     const dispatch = useDispatch()
     const taxes = useSelector((state) => state.taxes)
+    const rentLimit = useSelector((state) => state.rentLimiter)
+    let hasRental = taxes.some(tax => tax.source === "dedRental")
+    if(hasRental) dispatch(setRentLimiter(true))
 
     const addTaxes = (taxItem) => {
         dispatch(addTax(taxItem));
+        setRentLimiter(true)
         const updatedTaxes = [...taxes, taxItem];
         Toaster.justToast('success', 'Added', () => { });
         LocalStore.storeTax(JSON.stringify(updatedTaxes));
@@ -29,7 +35,7 @@ export default function HousingForm() {
 
     const { values, handleChange, handleSubmit, errors, touched } = useFormik({
         initialValues: initValues,
-        validationSchema: HousingYup.createHousingDeduction,
+        validationSchema: RentalYup.createRentalDeduction,
         onSubmit: (values) => {
             try {
                 let amt = parseFloat(values.amount).toFixed(2);
@@ -37,7 +43,7 @@ export default function HousingForm() {
                 const taxWithId = {
                     ...values,
                     yearTotAmt,
-                    source: 'dedHousing',
+                    source: 'dedRental',
                     taxType:'deduction',
                     id: uuidv4(),
                 };
@@ -119,7 +125,7 @@ export default function HousingForm() {
                 </div>
                 <div className="row mb-1">
                     <div className="col-12">
-                        <button type='submit' className='btn btn-success w-100'>Add Housing Expenses</button>
+                        <button disabled={rentLimit} type='submit' className='btn btn-success w-100'>Add Rental Expenses</button>
                     </div>
                 </div>
             </form>

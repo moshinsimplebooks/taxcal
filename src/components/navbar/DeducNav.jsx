@@ -8,10 +8,10 @@ export default function DeducNav() {
     return (
         <ul className="nav nav-pills nav-fill border rounded mt-4 shadow-sm">
             <li className="nav-item">
-                <NavLink to={'medical'} className={`nav-link ${isActive ? 'active' : ''}`}>Medical</NavLink>
+                <NavLink to={'rental'} className={`nav-link ${isActive ? 'active' : ''}`}>Rental</NavLink>
             </li>
             <li className="nav-item">
-                <NavLink to={'housing'} className="nav-link">Housing Loan</NavLink>
+                <NavLink to={'solar'} className="nav-link">Solar Loan</NavLink>
             </li>
         </ul>
     )

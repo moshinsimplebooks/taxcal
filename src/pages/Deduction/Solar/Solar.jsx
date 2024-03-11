@@ -1,15 +1,15 @@
 import React from 'react'
-import HousingIncList from './HousingDedList/HousingDedList'
-import HousingForm from './HousingForm/HousingForm'
+import SolarIncList from './SolarDedList/SolarDedList'
+import SolarForm from './SolarForm/SolarForm'
 
 export default function Investment() {
   return (
     <>
       <div className="row mt-4">
         {/* the list card */}
-        <HousingIncList />
+        <SolarIncList />
         {/* the form area */}
-        <HousingForm />
+        <SolarForm />
       </div>
     </>
   )
