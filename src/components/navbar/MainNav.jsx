@@ -3,7 +3,6 @@ import { NavLink, useLocation,Navigate } from 'react-router-dom'
 
 export default function MainNav() {
     const location = useLocation();
-
     const isActive = location.pathname === '/';
 
     if (isActive) {
@@ -17,6 +16,8 @@ export default function MainNav() {
                 <nav className="nav nav-pills flex-column">
                     <NavLink to={'income/'} className={`nav-link ${isActive ? 'active' : ''}`}>Income</NavLink>
                     <NavLink to={'deduction/'} className="nav-link " >Deductions</NavLink>
+                    <NavLink to={'apit'} className="nav-link " >APIT</NavLink>
+                    <NavLink to={'calculation'} className="nav-link " >Calculation</NavLink>
                 </nav>
             </div>
         </div>

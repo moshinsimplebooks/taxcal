@@ -10,26 +10,32 @@ import Buisness from './pages/Income/Buisness/Buisness'
 import Investment from './pages/Income/Investment/Investment'
 import Solar from './pages/Deduction/Solar/Solar'
 import Other from './pages/Income/Other/Other'
+import Apit from './pages/Apit/Apit'
+import Calculations from './pages/Calculations/Calculations'
+import NotFound from './pages/NotFound/NotFound'
 function App() {
 
   return (
     <>
       <Routes>
-        <Route path='/' element={<Main/>}>
-          <Route index element={<Income/>}/>
-          <Route  path='income' element={<Income/>}>
-            <Route index element={<Employee/>}/>
-            <Route path='employee' element={<Employee/>}/>
-            <Route path='buisness' element={<Buisness/>}/>
-            <Route path='investment' element={<Investment/>}/>
-            <Route path='other' element={<Other/>}/>
+        <Route path='/' element={<Main />}>
+          <Route index element={<Income />} />
+          <Route path='income' element={<Income />}>
+            <Route index element={<Employee />} />
+            <Route path='employee' element={<Employee />} />
+            <Route path='buisness' element={<Buisness />} />
+            <Route path='investment' element={<Investment />} />
+            <Route path='other' element={<Other />} />
           </Route>
-          <Route path='deduction' element={<Deduction/>}>
-            <Route index element={<Rental/>}/>
-            <Route path='rental' element={<Rental/>}/>
-            <Route path='solar' element={<Solar/>}/>
+          <Route path='deduction' element={<Deduction />}>
+            <Route index element={<Rental />} />
+            <Route path='rental' element={<Rental />} />
+            <Route path='solar' element={<Solar />} />
           </Route>
+          <Route path='apit' element={<Apit />} />
+          <Route path='calculation' element={<Calculations />} />
         </Route>
+        <Route path='*' element={<NotFound />} />
       </Routes>
     </>
   )
