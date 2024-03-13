@@ -11,7 +11,10 @@ export default function DeducNav() {
                 <NavLink to={'rental'} className={`nav-link ${isActive ? 'active' : ''}`}>Rental</NavLink>
             </li>
             <li className="nav-item">
-                <NavLink to={'solar'} className="nav-link">Solar Loan</NavLink>
+                <NavLink to={'solar'} className="nav-link">Solar Relief</NavLink>
+            </li>
+            <li className="nav-item">
+                <NavLink to={'donation'} className="nav-link">Donation</NavLink>
             </li>
         </ul>
     )

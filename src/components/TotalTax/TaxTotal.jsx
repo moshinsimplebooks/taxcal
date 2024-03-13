@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import calculateTax from '../../Utils/EmployeeTaxer/EmpTaxer';
 import RentDeduction from '../../Utils/DeductionCalc/RentDeduction/RentDeduction';
 import SolarDeduction from '../../Utils/DeductionCalc/SolarDeduction/SolarDeduction';
+import DonationDeduction from '../../Utils/DeductionCalc/DonationDeduction/DonationDeduction';
 
 export default function TaxTotal() {
 
@@ -19,9 +20,15 @@ export default function TaxTotal() {
     });
 
     //caclulate the deduction based on the deduction type
+    // for renatl calculations
     let rentalDeductions = filterDeductions.filter(tax => tax.source === "dedRental")
     let rentalTax = 0;
     rentalTax = RentDeduction(rentalDeductions)
+
+    // for donations calculations
+    let donationDeductions = filterDeductions.filter(tax => tax.source === "dedDonation")
+    let donationTax = 0;
+    donationTax = DonationDeduction(donationDeductions)
 
     // for solar calculations
     let solarDeductions = filterDeductions.filter(tax => tax.source === "dedSolar")
@@ -32,7 +39,7 @@ export default function TaxTotal() {
         // calculate the deduction totals
         let taxablePay = 0;
         let totalTaxAmount = 0;
-        taxablePay = parseFloat(totalIncomeAmount).toFixed(2) - (parseFloat(rentalTax) + parseFloat(solarTax))
+        taxablePay = parseFloat(totalIncomeAmount).toFixed(2) - (parseFloat(rentalTax) + parseFloat(solarTax)+parseFloat(donationTax))
         totalTaxAmount = calculateTax(taxablePay)
         return parseFloat(totalTaxAmount).toFixed(2);
     };

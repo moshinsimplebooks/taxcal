@@ -13,6 +13,7 @@ import Other from './pages/Income/Other/Other'
 import Apit from './pages/Apit/Apit'
 import Calculations from './pages/Calculations/Calculations'
 import NotFound from './pages/NotFound/NotFound'
+import Donation from './pages/Deduction/Donation/Donation'
 function App() {
 
   return (
@@ -31,6 +32,7 @@ function App() {
             <Route index element={<Rental />} />
             <Route path='rental' element={<Rental />} />
             <Route path='solar' element={<Solar />} />
+            <Route path='donation' element={<Donation />} />
           </Route>
           <Route path='apit' element={<Apit />} />
           <Route path='calculation' element={<Calculations />} />
