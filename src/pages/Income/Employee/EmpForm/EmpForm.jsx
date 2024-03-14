@@ -7,8 +7,11 @@ import { v4 as uuidv4 } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux'
 import { addTax } from '../../../../Features/Taxer/taxSlice'
 import { NumericFormat } from 'react-number-format'
+import Select from 'react-select'
+import CharityOrgs from '../../../../Utils/Constants/CharityOrgs'
 
 export default function EmpForm() {
+    const options = CharityOrgs
     const dispatch = useDispatch()
     const taxess = useSelector((state) => state.taxes)
 
@@ -24,6 +27,7 @@ export default function EmpForm() {
         amount: '',
         description: '',
         anum: '',
+        just: '',
     }
     const { values, handleChange, handleSubmit, errors, touched } = useFormik({
         initialValues: initValues,
@@ -36,7 +40,7 @@ export default function EmpForm() {
                     ...values,
                     yearTotAmt,
                     source: 'empIncome',
-                    taxType:'income',
+                    taxType: 'income',
                     id: uuidv4(),
                 };
                 addTaxess(taxWithId);
@@ -48,6 +52,16 @@ export default function EmpForm() {
     return (
         <div className="col-sm-5">
             <form className='needs-validation' noValidate onSubmit={handleSubmit}>
+                <Select
+                    defaultValue={options[0]}
+                    name='justSelect'
+                    // value={options.find(option => option.value === values.just)}
+                    onChange={(selectedOption) => {
+                        handleChange({ target: { name: 'just', value: selectedOption.value } });
+                    }}
+                    options={options}
+                />
+
                 <div className="row mb-2">
                     <div className="col-6">
                         <label htmlFor="validationType" className="form-label">Enter Type</label>

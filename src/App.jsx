@@ -5,7 +5,6 @@ import Main from './pages/Main'
 import Income from './pages/Income/Income'
 import Employee from './pages/Income/Employee/Employee'
 import Deduction from './pages/Deduction/Deduction'
-import Rental from './pages/Deduction/Rental/Rental'
 import Buisness from './pages/Income/Buisness/Buisness'
 import Investment from './pages/Income/Investment/Investment'
 import Solar from './pages/Deduction/Solar/Solar'
@@ -29,8 +28,7 @@ function App() {
             <Route path='other' element={<Other />} />
           </Route>
           <Route path='deduction' element={<Deduction />}>
-            <Route index element={<Rental />} />
-            <Route path='rental' element={<Rental />} />
+            <Route index element={<Solar />} />
             <Route path='solar' element={<Solar />} />
             <Route path='donation' element={<Donation />} />
           </Route>
